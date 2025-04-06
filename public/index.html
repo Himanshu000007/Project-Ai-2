@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Box Picker</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        .gradient-bg {
+            background: linear-gradient(to right, #4f46e5, #3b82f6);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white py-4 shadow-lg">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-box-open text-2xl"></i>
+                <h1 class="text-2xl font-bold">SubScribePick</h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-gray-200">Home</a>
+                <a href="#" class="hover:text-gray-200">How It Works</a>
+                <a href="#" class="hover:text-gray-200">About</a>
+                <a href="#" class="hover:text-gray-200">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden gradient-bg text-white py-4 px-4 md:hidden">
+        <a href="#" class="block py-2">Home</a>
+        <a href="#" class="block py-2">How It Works</a>
+        <a href="#" class="block py-2">About</a>
+        <a href="#" class="block py-2">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="text-center">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Find Your Perfect Subscription Box</h2>
+            <p class="text-xl text-gray-600 mb-8">Tell us what you like, and we'll recommend subscription boxes tailored to your interests.</p>
+        </div>
+    </div>
+
+    <!-- Preference Form -->
+    <div class="container mx-auto px-4 mb-16">
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
+            <form id="preferences-form" class="space-y-6">
+                <div>
+                    <label for="interests" class="block text-gray-700 font-medium mb-2">What are you interested in?</label>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button type="button" class="interest-tag px-4 py-2 rounded-full border border-gray-300 hover:bg-indigo-100 hover:border-indigo-300" data-interest="Beauty & Skincare">Beauty & Skincare</button>
+                        <button type="button" class="interest-tag px-4 py-2 rounded-full border border-gray-300 hover:bg-indigo-100 hover:border-indigo-300" data-interest="Food & Cooking">Food & Cooking</button>
+                        <button type="button" class="interest-tag px-4 py-2 rounded-full border border-gray-300 hover:bg-indigo-100 hover:border-indigo-300" data-interest="Books & Reading">Books & Reading</button>
+                        <button type="button" class="interest-tag px-4 py-2 rounded-full border border-gray-300 hover:bg-indigo-100 hover:border-indigo-300" data-interest="Fitness & Health">Fitness & Health</button>
+                        <button type="button" class="interest-tag px-4 py-2 rounded-full border border-gray-300 hover:bg-indigo-100 hover:border-indigo-300" data-interest="Home Decor">Home Decor</button>
+                        <button type="button" class="interest-tag px-4 py-2 rounded-full border border-gray-300 hover:bg-indigo-100 hover:border-indigo-300" data-interest="Pet Supplies">Pet Supplies</button>
+                        <button type="button" class="interest-tag px-4 py-2 rounded-full border border-gray-300 hover:bg-indigo-100 hover:border-indigo-300" data-interest="Kids & Family">Kids & Family</button>
+                        <button type="button" class="interest-tag px-4 py-2 rounded-full border border-gray-300 hover:bg-indigo-100 hover:border-indigo-300" data-interest="Gaming">Gaming</button>
+                    </div>
+                    <input type="hidden" id="selected-interests" name="interests">
+                    <input type="text" id="custom-interest" class="w-full p-3 border border-gray-300 rounded-md" placeholder="Or type your interests here...">
+                </div>
+                
+                <div>
+                    <label for="budget" class="block text-gray-700 font-medium mb-2">Monthly Budget</label>
+                    <select id="budget" name="budget" class="w-full p-3 border border-gray-300 rounded-md">
+                        <option value="under-25">Under $25</option>
+                        <option value="25-50">$25 - $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="over-100">Over $100</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="frequency" class="block text-gray-700 font-medium mb-2">Preferred Delivery Frequency</label>
+                    <select id="frequency" name="frequency" class="w-full p-3 border border-gray-300 rounded-md">
+                        <option value="monthly">Monthly</option>
+                        <option value="bi-monthly">Bi-Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Additional Preferences</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" name="preferences" value="eco-friendly" class="mr-2">
+                            <span>Eco-friendly/Sustainable</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" name="preferences" value="small-business" class="mr-2">
+                            <span>Support small businesses</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" name="preferences" value="customizable" class="mr-2">
+                            <span>Customizable boxes</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-md transition duration-300 flex items-center justify-center">
+                    <span>Find My Perfect Subscription Boxes</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results-section" class="container mx-auto px-4 py-8 hidden">
+        <h3 class="text-2xl font-bold text-center mb-8">Your Personalized Subscription Box Recommendations</h3>
+        
+        <div id="loading" class="text-center py-12 hidden">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
+            <p class="mt-4 text-gray-600">Finding the perfect subscriptions for you...</p>
+        </div>
+        
+        <div id="results-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Results will be populated here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4">SubScribePick</h3>
+                    <p class="text-gray-300">Find the perfect subscription boxes tailored to your interests.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Company</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">About Us</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">How It Works</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Legal</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p>&copy; 2025 SubScribePick. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Interest tag selection
+        const interestTags = document.querySelectorAll('.interest-tag');
+        const selectedInterestsInput = document.getElementById('selected-interests');
+        let selectedInterests = [];
+
+        interestTags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                const interest = this.getAttribute('data-interest');
+                
+                if (this.classList.contains('bg-indigo-100')) {
+                    // Remove interest
+                    this.classList.remove('bg-indigo-100', 'border-indigo-300');
+                    selectedInterests = selectedInterests.filter(item => item !== interest);
+                } else {
+                    // Add interest
+                    this.classList.add('bg-indigo-100', 'border-indigo-300');
+                    selectedInterests.push(interest);
+                }
+                
+                selectedInterestsInput.value = selectedInterests.join(', ');
+            });
+        });
+
+        // Form submission
+        document.getElementById('preferences-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const interests = selectedInterests.length > 0 ? 
+                selectedInterests.join(', ') : 
+                document.getElementById('custom-interest').value;
+            
+            const budget = formData.get('budget');
+            const frequency = formData.get('frequency');
+            const additionalPrefs = [...formData.getAll('preferences')];
+            
+            // Show loading
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('results-section').classList.remove('hidden');
+            document.getElementById('results-container').innerHTML = '';
+            
+            // Call API
+            try {
+                const response = await fetch('/api/recommend', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        interests,
+                        budget,
+                        frequency,
+                        additionalPreferences: additionalPrefs
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Error fetching recommendations');
+                }
+                
+                const data = await response.json();
+                
+                // Hide loading
+                document.getElementById('loading').classList.add('hidden');
+                
+                // Display results
+                displayResults(data.recommendations);
+                
+                // Scroll to results
+                document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('results-container').innerHTML = `
+                    <div class="col-span-full text-center py-8">
+                        <i class="fas fa-exclamation-circle text-red-500 text-4xl mb-4"></i>
+                        <p class="text-xl text-gray-700">Sorry, we encountered an error. Please try again later.</p>
+                    </div>
+                `;
+            }
+        });
+
+        // Display results function
+        function displayResults(recommendations) {
+            const container = document.getElementById('results-container');
+            
+            if (!recommendations || recommendations.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-8">
+                        <i class="fas fa-search text-gray-400 text-4xl mb-4"></i>
+                        <p class="text-xl text-gray-700">No recommendations found. Try adjusting your preferences.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            recommendations.forEach(box => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full transition-transform duration-300 hover:scale-105';
+                
+                // Use a more reliable placeholder service
+                <!-- const placeholderImage = `https://placehold.co/300x150/random?text=${encodeURIComponent(box.name)}`; -->
+                //const placeholderImage = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgZmlsbD0iI2NjY2NjYyIvPjwvc3ZnPg==";
+                const placeholderImage = `https://picsum.photos/300/150?random=${Math.floor(Math.random() * 1000)}`;
+                card.innerHTML = `
+                    <div class="h-48 overflow-hidden">
+                        <img src="${placeholderImage}" 
+                             alt="${box.name}" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <h4 class="text-xl font-bold mb-2">${box.name}</h4>
+                        <p class="text-sm text-gray-500 mb-4">${box.category}</p>
+                        <p class="text-gray-700 mb-4">${box.description}</p>
+                        <div class="flex items-center mb-3">
+                            <span class="font-bold mr-2">Price:</span>
+                            <span>${box.price}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="font-bold mr-2">Frequency:</span>
+                            <span>${box.frequency}</span>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <a href="${box.url || '#'}" target="_blank" class="block w-full py-2 text-center bg-indigo-600 hover:bg-indigo-700 text-white rounded-md">
+                            Learn More
+                        </a>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
