@@ -134,6 +134,7 @@ app.listen(PORT, () => {
     console.log(`Gemini API ${geminiAI && process.env.USE_GEMINI_API === 'true' ? 'enabled' : 'disabled'}`);
   });
 
+
 // Fallback function to generate sample recommendations based on user preferences
 // function getFallbackRecommendations(interests, budget, frequency, additionalPreferences = []) {
 //   // Extract main interest category
